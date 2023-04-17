@@ -7,11 +7,25 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
+        centerTitle: true,
+        title: const Text(
+  'Notes App',
+  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),
+),
       ),
-      body: Center(
-        child: Text('This is my simple NotesApp'),
-      ),
+      body: Column(
+        children: [
+          Container(
+            child: Center(
+              child: Text('')
+            ),
+          ),
+          Container(
+            child: ElevatedButton(onPressed: (){},child: Text('+')),
+          )
+        ],
+      
+      )
     );
   }
 }
