@@ -21,7 +21,11 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Container(
-            child: ElevatedButton(onPressed: (){},child: Text('+')),
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 300),
+            child: Text(''),
+          ),
+          Container(
+            child: ElevatedButton(onPressed: (){},child: Text('Tambah')),
           )
         ],
       
