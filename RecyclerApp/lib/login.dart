@@ -39,6 +39,7 @@ class _loginRegisterState extends State<loginRegister> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -75,7 +76,8 @@ class _loginRegisterState extends State<loginRegister> {
                 ),
                 TextFormField(
                   controller: passwordController,
-                  decoration: const InputDecoration(hintText: 'Password'),
+                  decoration: const InputDecoration(hintText: 'Password',),
+                  obscureText: true,
                 ),
                 SizedBox(
                   height: 20,
@@ -91,15 +93,15 @@ class _loginRegisterState extends State<loginRegister> {
                       ),
                     ),
                     onPressed: () async {
-
                       User? user = await loginUsingEmailPassword(
                           email: emailController.text,
                           password: passwordController.text,
                           context: context);
                       print(user);
                       if (user != null) {
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => HomePage()));
+                        print('Username Not Found');
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomePage()));
                       }
                     },
                     child: Text(

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
+import 'package:mini_project/login.dart';
 
 
 
@@ -19,6 +20,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -42,9 +44,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Container(
                     child: Image.network(
                   'https://img.freepik.com/free-vector/waste-management-concept-illustration_114360-8725.jpg',
-                  height: 350,
+                  height: 250,
                   fit: BoxFit.fitWidth,
                 )),
+                SizedBox(
+                  height: 30,),
                 TextFormField(
                   controller: usernamebaruController,
                   decoration: const InputDecoration(hintText: 'Username'),
@@ -62,6 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextFormField(
                   controller: passwordbaruController,
                   decoration: const InputDecoration(hintText: 'Password'),
+                  obscureText: true,
                 ),
                 SizedBox(
                   height: 30,
@@ -99,6 +104,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 20,),
+                Column(
+                      children: [
+                        const Text(
+                          "Already Having an account? ",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => loginRegister()));
+                          },
+                          child: const Text(
+                            'Sign in!',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ],
+                    ),
+                  
+                
               ],
             ),
           ),
