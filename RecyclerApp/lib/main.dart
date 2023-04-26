@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:notes/HomePage.dart';
-import 'package:notes/login.dart';
+import 'package:mini_project/login.dart';
 
-void main() {
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -31,7 +33,6 @@ class _home extends StatefulWidget {
 }
 
 class __homeState extends State<_home> {
-
   Future<FirebaseApp> _initialiseFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     return firebaseApp;

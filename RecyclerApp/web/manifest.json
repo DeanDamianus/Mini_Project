@@ -1,6 +1,6 @@
 {
-    "name": "notes",
-    "short_name": "notes",
+    "name": "mini_project",
+    "short_name": "mini_project",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

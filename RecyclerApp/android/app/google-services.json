@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1039619625851",
-    "project_id": "mini-project-alterra-c8c3a",
-    "storage_bucket": "mini-project-alterra-c8c3a.appspot.com"
+    "project_number": "170808432205",
+    "project_id": "mini-project-alterra-5d59d",
+    "storage_bucket": "mini-project-alterra-5d59d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1039619625851:android:e7a3fa3c8236c55a5423de",
+        "mobilesdk_app_id": "1:170808432205:android:d5bacc0cbb1c1d55f52e04",
         "android_client_info": {
-          "package_name": "com.alterra.miniProject"
+          "package_name": "com.example.mini_project"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1039619625851-8h556s4lr5arbnsmag44nav1a07t8rdc.apps.googleusercontent.com",
+          "client_id": "170808432205-4mjhv60r5s33bp288i0h4hhim0slonbv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD7c1ATK8XuqpM1tXgXRJCGnaEOn7r08BQ"
+          "current_key": "AIzaSyB1_v03n2TMBLLWl797Jc55lz6dWPTFlow"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1039619625851-8h556s4lr5arbnsmag44nav1a07t8rdc.apps.googleusercontent.com",
+              "client_id": "170808432205-4mjhv60r5s33bp288i0h4hhim0slonbv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

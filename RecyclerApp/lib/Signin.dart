@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:notes/HomePage.dart';
-import 'package:notes/login.dart';
+import 'package:mini_project/HomePage.dart';
+
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -75,10 +77,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomePage()));
+                      FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: emailbaruController.text,
+                              password: passwordbaruController.text)
+                          .then((value) {
+                        print('Created New Account');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
+                      }).onError((error, stackTrace) {
+                        print('Error ${error.toString()}');
+                      });
                     },
                     child: Text(
                       "Sign-Me Up!",

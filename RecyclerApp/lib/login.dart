@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:notes/HomePage.dart';
-import 'package:notes/Siginin.dart';
+import 'package:mini_project/HomePage.dart';
+import 'package:mini_project/Signin.dart';
 
 class loginRegister extends StatefulWidget {
   const loginRegister({super.key});
