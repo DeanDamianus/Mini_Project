@@ -69,14 +69,19 @@ class _loginRegisterState extends State<loginRegister> {
                 )),
                 TextFormField(
                   controller: emailController,
-                  decoration: const InputDecoration(hintText: 'Email'),
+                  decoration: InputDecoration(hintText: 'Email',
+                  prefixIcon: Icon(Icons.email_rounded),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 TextFormField(
                   controller: passwordController,
-                  decoration: const InputDecoration(hintText: 'Password',),
+                  decoration: InputDecoration(hintText: 'Password',
+                  prefixIcon: Icon(Icons.password_sharp),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),),
                   obscureText: true,
                 ),
                 SizedBox(

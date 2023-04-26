@@ -48,24 +48,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   fit: BoxFit.fitWidth,
                 )),
                 SizedBox(
-                  height: 30,),
+                  height: 10,),
                 TextFormField(
                   controller: usernamebaruController,
-                  decoration: const InputDecoration(hintText: 'Username'),
+                  decoration: InputDecoration(hintText: 'Username',
+                  prefixIcon: Icon(Icons.person),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 10,
                 ),
                 TextFormField(
                   controller: emailbaruController,
-                  decoration: const InputDecoration(hintText: 'Email'),
+                  decoration: InputDecoration(hintText: 'Email',
+                  prefixIcon: Icon(Icons.email_rounded),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)))
+                  ,
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 10,
                 ),
                 TextFormField(
                   controller: passwordbaruController,
-                  decoration: const InputDecoration(hintText: 'Password'),
+                  decoration: InputDecoration(hintText: 'Password',
+                  prefixIcon: Icon(Icons.password_sharp),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
                   obscureText: true,
                 ),
                 SizedBox(
