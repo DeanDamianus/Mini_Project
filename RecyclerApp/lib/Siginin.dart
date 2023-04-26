@@ -1,0 +1,96 @@
+import 'package:flutter/material.dart';
+import 'package:notes/HomePage.dart';
+import 'package:notes/login.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController usernamebaruController = TextEditingController();
+  TextEditingController emailbaruController = TextEditingController();
+  TextEditingController passwordbaruController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.network(
+                'https://media.istockphoto.com/id/1162752096/id/vektor/ilustrasi-vektor-tanda-daur-ulang.jpg?s=612x612&w=0&k=20&c=ZqErz5KqKUeicER-S5vg1dBkwEtsAfjLmynx1-edtoQ=',
+                fit: BoxFit.contain,
+                height: 32,
+              ),
+              Container(
+                  padding: const EdgeInsets.all(8.0), child: Text('Re-Cycler'))
+            ],
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    child: Image.network(
+                  'https://img.freepik.com/free-vector/waste-management-concept-illustration_114360-8725.jpg',
+                  height: 350,
+                  fit: BoxFit.fitWidth,
+                )),
+                TextFormField(
+                  controller: usernamebaruController,
+                  decoration: const InputDecoration(hintText: 'Username'),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                TextFormField(
+                  controller: emailbaruController,
+                  decoration: const InputDecoration(hintText: 'Email'),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                TextFormField(
+                  controller: passwordbaruController,
+                  decoration: const InputDecoration(hintText: 'Password'),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  width: 250,
+                  height: 45,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage()));
+                    },
+                    child: Text(
+                      "Sign-Me Up!",
+                      style: TextStyle(
+                        color: Color(0xffffffff),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
+  }
+}

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.notes">
+    package="com.alterra.miniProject">
    <application
-        android:label="notes"
+        android:label="Re-Cycler"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
