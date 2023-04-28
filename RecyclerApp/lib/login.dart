@@ -69,9 +69,11 @@ class _loginRegisterState extends State<loginRegister> {
                 )),
                 TextFormField(
                   controller: emailController,
-                  decoration: InputDecoration(hintText: 'Email',
-                  prefixIcon: Icon(Icons.email_rounded),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                  decoration: InputDecoration(
+                    hintText: 'Email',
+                    prefixIcon: Icon(Icons.email_rounded),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)),
                   ),
                 ),
                 SizedBox(
@@ -79,9 +81,12 @@ class _loginRegisterState extends State<loginRegister> {
                 ),
                 TextFormField(
                   controller: passwordController,
-                  decoration: InputDecoration(hintText: 'Password',
-                  prefixIcon: Icon(Icons.password_sharp),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),),
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    prefixIcon: Icon(Icons.password_sharp),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                  ),
                   obscureText: true,
                 ),
                 SizedBox(
@@ -125,7 +130,7 @@ class _loginRegisterState extends State<loginRegister> {
                     child: Row(
                       children: [
                         const Text(
-                          "Don't have account? ",
+                          "Don't have an account? ",
                           style: TextStyle(color: Colors.black),
                         ),
                         GestureDetector(
