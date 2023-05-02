@@ -24,8 +24,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(
-                'https://media.istockphoto.com/id/1162752096/id/vektor/ilustrasi-vektor-tanda-daur-ulang.jpg?s=612x612&w=0&k=20&c=ZqErz5KqKUeicER-S5vg1dBkwEtsAfjLmynx1-edtoQ=',
+              Image.asset(
+                'assets/images/recycler.jpg',
                 fit: BoxFit.contain,
                 height: 32,
               ),
@@ -42,8 +42,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    child: Image.network(
-                  'https://img.freepik.com/free-vector/waste-management-concept-illustration_114360-8725.jpg',
+                    child: Image.asset(
+                  'assets/images/register.png',
                   height: 250,
                   fit: BoxFit.fitWidth,
                 )),

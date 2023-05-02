@@ -13,20 +13,20 @@ class contentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.network(
-              'https://media.istockphoto.com/id/1162752096/id/vektor/ilustrasi-vektor-tanda-daur-ulang.jpg?s=612x612&w=0&k=20&c=ZqErz5KqKUeicER-S5vg1dBkwEtsAfjLmynx1-edtoQ=',
-              fit: BoxFit.contain,
-              height: 32,
-            ),
-            Container(
-                padding: const EdgeInsets.all(8.0), child: Text('Re-Cycler'))
-          ],
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/recycler.jpg',
+                fit: BoxFit.contain,
+                height: 32,
+              ),
+              Container(
+                  padding: const EdgeInsets.all(8.0), child: Text('Re-Cycler'))
+            ],
+          ),
         ),
-      ),
       body: Container(
         child: GridView.count(
           primary: false,
@@ -43,10 +43,10 @@ class contentPage extends StatelessWidget {
               child: Container(
                   padding: const EdgeInsets.all(8),
                   color: Colors.brown,
-                  child: Container(
+                  child: Container( 
                     color: Colors.green,
-                    child: Image.network(
-                      'https://ouch-cdn2.icons8.com/lqn1lVXos-_Ie3Rjiwwg9xGilkswH8vj8uMxjai02OM/rs:fit:256:253/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvODYz/LzZiMTQ3N2FlLTY1/MmItNGY0Yy1hYjg2/LTY2MzIyYmQ0MGUz/YS5zdmc.png',
+                    child: Image.asset(
+                      'assets/images/paper.png',
                     ),
                   )),
             ),
@@ -60,9 +60,9 @@ class contentPage extends StatelessWidget {
                   color: Colors.brown,
                   child: Container(
                     color: Colors.green,
-                    child: Image.network(
-                      'https://ouch-cdn2.icons8.com/hkurf0IOdg8rQ9piRU7enMWYYADh_Y5x_J33bybGpLQ/rs:fit:256:593/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvODMx/LzE4NDk0NzI1LTdi/YmYtNDM5NS1hZjUz/LWI2Njk5MGVkMjI2/Ny5zdmc.png',
-                    ),
+                    child: Image.asset(
+                      'assets/images/plastics.png',
+                    ), 
                   )),
             ),
           ],

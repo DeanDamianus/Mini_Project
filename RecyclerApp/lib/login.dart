@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
 import 'package:mini_project/Signin.dart';
+import 'package:mini_project/splash.dart';
 
 class loginRegister extends StatefulWidget {
   const loginRegister({super.key});
@@ -43,8 +44,8 @@ class _loginRegisterState extends State<loginRegister> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(
-                'https://media.istockphoto.com/id/1162752096/id/vektor/ilustrasi-vektor-tanda-daur-ulang.jpg?s=612x612&w=0&k=20&c=ZqErz5KqKUeicER-S5vg1dBkwEtsAfjLmynx1-edtoQ=',
+              Image.asset(
+                'assets/images/recycler.jpg',
                 fit: BoxFit.contain,
                 height: 32,
               ),
@@ -62,8 +63,8 @@ class _loginRegisterState extends State<loginRegister> {
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    child: Image.network(
-                  'https://ouch-cdn2.icons8.com/wIEzfyfPSSxxqvOIgz3wiHnOK42SE3l4zSZ3qk8yWXY/rs:fit:256:256/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvMjE3/L2JjMmQ3NjJhLTEz/YWYtNDVjYy1iNWNm/LTM2NWQyNzI4ZTM1/Ni5zdmc.png',
+                    child: Image.asset(
+                  'assets/images/login.png',
                   height: 350,
                   fit: BoxFit.fitWidth,
                 )),
@@ -111,7 +112,7 @@ class _loginRegisterState extends State<loginRegister> {
                       if (user != null) {
                         print('Username Not Found');
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => HomePage()));
+                            builder: (context) => splashScreen()));
                       }
                     },
                     child: Text(

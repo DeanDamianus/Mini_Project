@@ -14,8 +14,8 @@ class logoutScreen extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(
-                'https://media.istockphoto.com/id/1162752096/id/vektor/ilustrasi-vektor-tanda-daur-ulang.jpg?s=612x612&w=0&k=20&c=ZqErz5KqKUeicER-S5vg1dBkwEtsAfjLmynx1-edtoQ=',
+              Image.asset(
+                'assets/images/recycler.jpg',
                 fit: BoxFit.contain,
                 height: 32,
               ),

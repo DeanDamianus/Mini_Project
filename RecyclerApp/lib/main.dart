@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mini_project/HomePage.dart';
 import 'package:mini_project/login.dart';
+import 'package:mini_project/splash.dart';
+import 'package:mini_project/splashMasuk.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +50,7 @@ class __homeState extends State<_home> {
             return loginRegister();
           }
           return const Center(
-            child: CircularProgressIndicator(),
+            child: loginRegister(),
           );
         },
       ),

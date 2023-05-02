@@ -16,13 +16,13 @@ class kertasPage extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(
-                'https://media.istockphoto.com/id/1162752096/id/vektor/ilustrasi-vektor-tanda-daur-ulang.jpg?s=612x612&w=0&k=20&c=ZqErz5KqKUeicER-S5vg1dBkwEtsAfjLmynx1-edtoQ=',
+              Image.asset(
+                'assets/images/recycler.jpg',
                 fit: BoxFit.contain,
                 height: 32,
               ),
               Container(
-                  padding: const EdgeInsets.all(8.0), child: Text('Kertas'))
+                  padding: const EdgeInsets.all(8.0), child: Text('Re-Cycler'))
             ],
           ),
         ),
@@ -52,7 +52,7 @@ class kertasPage extends StatelessWidget {
                             padding: EdgeInsets.fromLTRB(30, 0 , 150, 0),
                             child: Text('Koran',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                           ),
-                          Image.network('https://ouch-cdn2.icons8.com/mJzpDjcP0qZ3-b3151m0Pj690GbEKNVAJ3H1-OOKcao/rs:fit:256:334/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNjI5/LzRjYzlhNTBhLWFm/MWQtNGUzOC1hMzk3/LTU3YmMxNDNhODUy/Ny5zdmc.png',
+                          Image.asset('assets/images/koran.png',
                           height: 80,)
                         ],
                       ),
@@ -79,7 +79,7 @@ class kertasPage extends StatelessWidget {
                             padding: EdgeInsets.fromLTRB(30, 0 , 120, 0),
                             child: Text('Kardus',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                           ),
-                          Image.network('https://ouch-cdn2.icons8.com/FtoViLOLPTrg3If-hKdfUhsPfvRAforwdu_JBUsoG48/rs:fit:256:206/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNzI3/L2VjMWQ3MjcyLTU5/ZTctNGIzNC1iOGJh/LWM3NDZkZjY2ZTVj/Yy5wbmc.png',
+                          Image.asset('assets/images/kardus.png',
                           height: 80,)
                         ],
                       ),
@@ -106,7 +106,7 @@ class kertasPage extends StatelessWidget {
                             padding: EdgeInsets.fromLTRB(30, 0 , 55, 0),
                             child: Text('Kertas Arsip',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                           ),
-                          Image.network('https://ouch-cdn2.icons8.com/h8n9G-J_qrxOxSDi7PexM75W8oxF8_E-nHphaR6TbHw/rs:fit:256:177/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvMzc2/Lzk4ODNjNjAxLWIy/NzEtNDYzZC1hYjFl/LTYxYTZhNzMzOTlk/Yy5zdmc.png',
+                          Image.asset('assets/images/papers.png',
                           height: 80,)
                         ],
                       ),
@@ -133,7 +133,7 @@ class kertasPage extends StatelessWidget {
                             padding: EdgeInsets.fromLTRB(30, 0 , 145, 0),
                             child: Text('Karton',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                           ),
-                          Image.network('https://ouch-cdn2.icons8.com/ju12XDUzNwXQmVwMLbXLeV7mflRVnNS9sLteDNrEjGk/rs:fit:256:399/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNTEy/LzE4MDBhMWU0LThl/MjMtNGMwNC1iNDcx/LThkNjAyYjU0MGE5/My5zdmc.png',
+                          Image.asset('assets/images/susu.png',
                           height: 80,)
                         ],
                       ),
@@ -144,7 +144,7 @@ class kertasPage extends StatelessWidget {
                   ),
 
                   Container(child: 
-                  Image.network('https://ouch-cdn2.icons8.com/1Ft5S3XbPFjn5wQ33b_-VIYP8uTDwt1lxdEjN1zjQOI/rs:fit:256:137/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvMjE1/L2ZmZmZjYjFiLTFk/OGItNGI4NS04Yzdi/LTg2ODdjZDdkMmZk/My5zdmc.png',
+                  Image.asset('assets/images/airplane.png',
                   height: 70,
                   alignment: Alignment.bottomLeft,),)
             

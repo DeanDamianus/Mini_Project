@@ -16,13 +16,13 @@ class plastikPage extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(
-                'https://media.istockphoto.com/id/1162752096/id/vektor/ilustrasi-vektor-tanda-daur-ulang.jpg?s=612x612&w=0&k=20&c=ZqErz5KqKUeicER-S5vg1dBkwEtsAfjLmynx1-edtoQ=',
+              Image.asset(
+                'assets/images/recycler.jpg',
                 fit: BoxFit.contain,
                 height: 32,
               ),
               Container(
-                  padding: const EdgeInsets.all(8.0), child: Text('Plastik'))
+                  padding: const EdgeInsets.all(8.0), child: Text('Re-Cycler'))
             ],
           ),
         ),
@@ -50,7 +50,7 @@ class plastikPage extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(30, 0 , 80, 0),
                         child: Text('Plastik Mineral',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                       ),
-                      Image.network('https://ouch-cdn2.icons8.com/mvuAM5gLkteoCcEK13LxGo8mlWVyIHms35HLNa2dTTc/rs:fit:256:566/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNjM3/LzZiMDgyNTM2LTZj/NDItNGE3Ny05N2Uz/LWU5MmJmM2E2NGM2/Yy5wbmc.png',
+                      Image.asset('assets/images/mineral.png',
                       height: 80,)
                     ],
                   ),
@@ -77,7 +77,7 @@ class plastikPage extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(30, 0 , 100, 0),
                         child: Text('Plastik Cup',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                       ),
-                      Image.network('https://ouch-cdn2.icons8.com/gY4niWrJJAy45nAQiLEYV6rMOZMrGN_k8EzkutjV1Kc/rs:fit:256:414/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvMTY1/LzMzYzk5NGUxLWU4/YTctNDAwZi05NWZm/LTA5MTRjYTBmZTNm/MS5zdmc.png',
+                      Image.asset('assets/images/plasticCup.png',
                       height: 80,)
                     ],
                   ),
@@ -104,7 +104,7 @@ class plastikPage extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(30, 0 , 110, 0),
                         child: Text('Galon Air',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                       ),
-                      Image.network('https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-gallons-of-water-illustration-png-image_6572748.png',
+                      Image.asset('assets/images/galon.png',
                       height: 80,)
                     ],
                   ),
@@ -113,7 +113,7 @@ class plastikPage extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Image.network('https://img.freepik.com/free-vector/bright-plastic-waste-flat-illustrations-collection_74855-16764.jpg',
+              Image.asset('assets/images/waste.png',
               height: 160,)
         
             ],
