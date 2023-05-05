@@ -32,7 +32,6 @@ class logoutScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              
               Container(
                 width: 250,
                 height: 45,

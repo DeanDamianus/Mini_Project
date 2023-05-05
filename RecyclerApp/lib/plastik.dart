@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
 import 'package:mini_project/content.dart';
 import 'package:mini_project/logout.dart';
+import 'package:mini_project/plastikContent/botolPage.dart';
+import 'package:mini_project/plastikContent/galonAir.dart';
+import 'package:mini_project/plastikContent/plasticCup.dart';
 import 'login.dart';
 
 class plastikPage extends StatelessWidget {
@@ -33,7 +36,10 @@ class plastikPage extends StatelessWidget {
                 height:90,
               ),
               GestureDetector(
-                onTap: (){},
+                onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => plastikMineralPage()));
+                  },
                 child: Container(
                   height: 100,
                   width: 350,
@@ -60,7 +66,10 @@ class plastikPage extends StatelessWidget {
                 height: 20,
               ),
               GestureDetector(
-                onTap:(){},
+                onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => plasticCupPage()));
+                  },
                 child: Container(
                   height: 100,
                   width: 350,
@@ -87,7 +96,10 @@ class plastikPage extends StatelessWidget {
                 height: 20,
               ),
               GestureDetector(
-                onTap: (){},
+                onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => galonAir()));
+                  },
                 child: Container(
                   height: 100,
                   width: 350,

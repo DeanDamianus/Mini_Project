@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
 import 'package:mini_project/login.dart';
-
-
+import 'package:mini_project/splash.dart';
+import 'package:mini_project/splashMasuk.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -16,6 +16,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController usernamebaruController = TextEditingController();
   TextEditingController emailbaruController = TextEditingController();
   TextEditingController passwordbaruController = TextEditingController();
+  TextEditingController nomorHp = TextEditingController();
+
+  Future signUp() async {
+    if (passwordConfirmed)
+  }
+
+  void dispose() {
+    usernamebaruController.dispose();
+    emailbaruController.dispose();
+    passwordbaruController.dispose();
+    nomorHp.dispose();
+    super.dispose();
+  }
+
+  Future signUp() async {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,42 +57,61 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                
                 Container(
                     child: Image.asset(
                   'assets/images/register.png',
-                  height: 250,
+                  height: 260,
                   fit: BoxFit.fitWidth,
                 )),
                 SizedBox(
-                  height: 10,),
+                  height: 10,
+                ),
                 TextFormField(
                   controller: usernamebaruController,
-                  decoration: InputDecoration(hintText: 'Username',
-                  prefixIcon: Icon(Icons.person),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+                  decoration: InputDecoration(
+                      hintText: 'Username',
+                      prefixIcon: Icon(Icons.person),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20))),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 TextFormField(
                   controller: emailbaruController,
-                  decoration: InputDecoration(hintText: 'Email',
-                  prefixIcon: Icon(Icons.email_rounded),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)))
-                  ,
+                  decoration: InputDecoration(
+                      hintText: 'Email',
+                      prefixIcon: Icon(Icons.email_rounded),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20))),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 TextFormField(
                   controller: passwordbaruController,
-                  decoration: InputDecoration(hintText: 'Password',
-                  prefixIcon: Icon(Icons.password_sharp),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+                  decoration: InputDecoration(
+                      hintText: 'Password',
+                      prefixIcon: Icon(Icons.password_sharp),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20))),
                   obscureText: true,
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 10,
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  controller: passwordbaruController,
+                  decoration: InputDecoration(
+                      hintText: 'Nomor HP',
+                      prefixIcon: Icon(Icons.phone_android),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 Container(
                   width: 250,
@@ -88,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
                               email: emailbaruController.text,
@@ -98,7 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                                builder: (context) => splashScreen()));
                       }).onError((error, stackTrace) {
                         print('Error ${error.toString()}');
                       });
@@ -111,32 +146,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 20,),
+            
                 Column(
-                      children: [
-                        const Text(
-                          "Already Having an account? ",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => loginRegister()));
-                          },
-                          child: const Text(
-                            'Sign in!',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
+                  children: [
+                    const Text(
+                      "Already Having an account? ",
+                      style: TextStyle(color: Colors.black),
                     ),
-                  
-                
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => loginRegister()));
+                      },
+                      child: const Text(
+                        'Sign in!',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
           ),

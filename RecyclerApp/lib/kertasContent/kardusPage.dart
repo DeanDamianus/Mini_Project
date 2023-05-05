@@ -7,18 +7,16 @@ import 'package:mini_project/logout.dart';
 import 'package:mini_project/plastik.dart';
 import 'package:quantity_input/quantity_input.dart';
 
-class koranPage extends StatefulWidget {
-  const koranPage({super.key});
+class kardusPage extends StatefulWidget {
+  const kardusPage({super.key});
 
   @override
-  State<koranPage> createState() => _koranPageState();
+  State<kardusPage> createState() => _kardusPageState();
 }
 
-class _koranPageState extends State<koranPage> {
-  int simpleIntInput = 0;
-  int totalHarga = 1000;
-
-
+class _kardusPageState extends State<kardusPage> {
+  int simpleIntInputkardus = 0;
+  int totalHargaKardus = 700;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +30,7 @@ class _koranPageState extends State<koranPage> {
               fit: BoxFit.contain,
               height: 32,
             ),
-            Container(padding: const EdgeInsets.all(8.0), child: Text('Koran'))
+            Container(padding: const EdgeInsets.all(8.0), child: Text('Kardus'))
           ],
         ),
       ),
@@ -42,16 +40,16 @@ class _koranPageState extends State<koranPage> {
             children: [
               Center(
                 child: Image.asset(
-                  'assets/images/koran.png',
+                  'assets/images/kardus.png',
                   height: 200,
                 ),
               ),
               SizedBox(
-                height: 5,
+                height: 10,
               ),
               Center(
                 child: Text(
-                  'Koran',
+                  'Kardus',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -65,15 +63,15 @@ class _koranPageState extends State<koranPage> {
                 height: 10,
               ),
               Center(
-                child: const Text('Total Harga 1 kg = Rp. 1.000,-'),
+                child: const Text('Total Harga 1 kg = Rp. 700,-'),
               ),
               SizedBox(
                 height: 10,
               ),
               Center(
                 child: QuantityInput(
-                    value: simpleIntInput,
-                    onChanged: (value) => setState(() => simpleIntInput =
+                    value: simpleIntInputkardus,
+                    onChanged: (value) => setState(() => simpleIntInputkardus =
                         int.parse(value.replaceAll(',', 'KG')))),
               ),
               SizedBox(
@@ -88,9 +86,9 @@ class _koranPageState extends State<koranPage> {
                   ),
                   onPressed: () async {
                     FirebaseFirestore.instance.collection('pesananSampah').add({
-                      "harga": totalHarga*simpleIntInput.toInt(),
-                      "berat": simpleIntInput,
-                      "jenis": "Koran"
+                      "harga": totalHargaKardus * simpleIntInputkardus.toInt(),
+                      "berat": simpleIntInputkardus,
+                      "jenis": "Kardus"
                     }).then((value) {
                       print(value.id);
                       Navigator.pop(context);

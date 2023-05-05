@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:mini_project/plastik.dart';
 import 'package:quantity_input/quantity_input.dart';
 
-class plastikMineralPage extends StatefulWidget {
-  const plastikMineralPage({super.key});
+class plasticCupPage extends StatefulWidget {
+  const plasticCupPage({super.key});
 
   @override
-  State<plastikMineralPage> createState() => _plastikMineralPageState();
+  State<plasticCupPage> createState() => _plasticCupPageState();
 }
 
-class _plastikMineralPageState extends State<plastikMineralPage> {
-    int simpleIntInputMineral = 0;
+class _plasticCupPageState extends State<plasticCupPage> {
+  int simpleIntInputCup = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _plastikMineralPageState extends State<plastikMineralPage> {
                 height: 32,
               ),
               Container(
-                  padding: const EdgeInsets.all(8.0), child: Text('Plastik Mineral'))
+                  padding: const EdgeInsets.all(8.0), child: Text('Plastic Cup'))
             ],
           ),
         ),
@@ -33,13 +33,13 @@ class _plastikMineralPageState extends State<plastikMineralPage> {
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: Column(
           children: [
-            Center(child: Image.asset('assets/images/mineral.png',
+            Center(child: Image.asset('assets/images/plasticCup.png',
             height: 200,),),
             SizedBox(
               height: 5,
             ),
             Center(
-              child: Text('Plastik Mineral', style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+              child: Text('Plastik Cup', style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
             ),
             SizedBox(
               height: 20,
@@ -50,17 +50,16 @@ class _plastikMineralPageState extends State<plastikMineralPage> {
             SizedBox(
               height: 10,
             ),
-         
             Center(
-              child: const Text('Total Harga 1 kg = Rp. 1.000,-'),
+              child: const Text('Total Harga 1 kg = Rp. 1.500,-'),
             ),
             SizedBox(
               height: 10,
             ),
             Center(
               child: QuantityInput(
-                  value: simpleIntInputMineral,
-                  onChanged: (value) => setState(() => simpleIntInputMineral = int.parse(value.replaceAll(',', 'KG')))
+                  value: simpleIntInputCup,
+                  onChanged: (value) => setState(() => simpleIntInputCup = int.parse(value.replaceAll(',', 'KG')))
                 ),),
             SizedBox(
               height: 10,

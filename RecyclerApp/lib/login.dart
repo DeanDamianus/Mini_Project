@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
-import 'package:mini_project/Signin.dart';
+import 'package:mini_project/Signup.dart';
 import 'package:mini_project/splash.dart';
 
 class loginRegister extends StatefulWidget {
@@ -14,24 +14,30 @@ class loginRegister extends StatefulWidget {
 }
 
 class _loginRegisterState extends State<loginRegister> {
-  static Future<User?> loginUsingEmailPassword(
-      {required String email,
-      required String password,
-      required BuildContext context}) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    User? user;
-    try {
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      user = userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print("No User Found for that email!");
-      }
-    }
-
-    return user;
+  // static Future<User?> loginUsingEmailPassword(
+  //     {required String email,
+  //     required String password,
+  //     required BuildContext context}) async {
+  //   FirebaseAuth auth = FirebaseAuth.instance;
+  //   User? user;
+  //   try {
+  //     UserCredential userCredential = await auth.signInWithEmailAndPassword(
+  //         email: email, password: password);
+  //     user = userCredential.user;
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'user-not-found') {
+  //       print("No User Found for that email!");
+  //     }
+  //   }
+  //   return user;
+  // }
+  Future signIn() async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text.trim(), 
+      password: passwordController.text.trim()
+      );
   }
+
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -60,7 +66,6 @@ class _loginRegisterState extends State<loginRegister> {
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                     child: Image.asset(
@@ -68,6 +73,7 @@ class _loginRegisterState extends State<loginRegister> {
                   height: 350,
                   fit: BoxFit.fitWidth,
                 )),
+                //EMAIL
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
@@ -80,6 +86,7 @@ class _loginRegisterState extends State<loginRegister> {
                 SizedBox(
                   height: 10,
                 ),
+                //PASSWORD
                 TextFormField(
                   controller: passwordController,
                   decoration: InputDecoration(
