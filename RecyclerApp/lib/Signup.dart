@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
 import 'package:mini_project/login.dart';
 import 'package:mini_project/splash.dart';
-import 'package:mini_project/splashMasuk.dart';
+import 'auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -13,24 +14,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController usernamebaruController = TextEditingController();
-  TextEditingController emailbaruController = TextEditingController();
-  TextEditingController passwordbaruController = TextEditingController();
-  TextEditingController nomorHp = TextEditingController();
-
-  Future signUp() async {
-    if (passwordConfirmed)
-  }
-
-  void dispose() {
-    usernamebaruController.dispose();
-    emailbaruController.dispose();
-    passwordbaruController.dispose();
-    nomorHp.dispose();
-    super.dispose();
-  }
-
-  Future signUp() async {}
+  AuthController authController = AuthController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +41,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                
                 Container(
                     child: Image.asset(
                   'assets/images/register.png',
@@ -68,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  controller: usernamebaruController,
+                  controller: authController.usernamebaruController,
                   decoration: InputDecoration(
                       hintText: 'Username',
                       prefixIcon: Icon(Icons.person),
@@ -79,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  controller: emailbaruController,
+                  controller: authController.emailbaruController,
                   decoration: InputDecoration(
                       hintText: 'Email',
                       prefixIcon: Icon(Icons.email_rounded),
@@ -90,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  controller: passwordbaruController,
+                  controller: authController.passwordbaruController,
                   decoration: InputDecoration(
                       hintText: 'Password',
                       prefixIcon: Icon(Icons.password_sharp),
@@ -103,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 TextFormField(
                   keyboardType: TextInputType.number,
-                  controller: passwordbaruController,
+                  controller: authController.nomorHp,
                   decoration: InputDecoration(
                       hintText: 'Nomor HP',
                       prefixIcon: Icon(Icons.phone_android),
@@ -124,19 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     onPressed: () async {
-                      FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                              email: emailbaruController.text,
-                              password: passwordbaruController.text)
-                          .then((value) {
-                        print('Created New Account');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => splashScreen()));
-                      }).onError((error, stackTrace) {
-                        print('Error ${error.toString()}');
-                      });
+                      authController.createAccount();
                     },
                     child: Text(
                       "Sign-Me Up!",
@@ -146,7 +117,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-            
                 Column(
                   children: [
                     const Text(
@@ -174,3 +144,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ));
   }
 }
+
+// Future createUser({required String name}) async {
+//   final docUser = FirebaseFirestore.instance.collection('users').doc('my-id');
+
+//   final json = {
+//     'name': name,
+//     'email': 'damianus@gmail.com'
+//     'password': 'Batikan56',
+//     'nomor': "087748688157",
+//   };
+
+//   await docUser.set(json);
+// }

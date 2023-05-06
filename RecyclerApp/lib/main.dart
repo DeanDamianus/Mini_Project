@@ -1,9 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mini_project/HomePage.dart';
 import 'package:mini_project/login.dart';
 import 'package:mini_project/splash.dart';
-import 'package:mini_project/splashMasuk.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,11 +12,21 @@ void main() async {
   runApp(const MyApp());
 }
 
+_init() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  final token = prefs.getString("userID");
+  if (token != null) {
+    Get.offAll(HomePage());
+  } else {
+    Get.offAll(loginRegister());
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),

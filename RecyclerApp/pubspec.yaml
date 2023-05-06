@@ -38,6 +38,8 @@ dependencies:
   quantity_input: ^1.0.2
   provider: ^6.0.5
   cloud_firestore: ^4.6.0
+  http: ^0.13.6
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
 import 'package:mini_project/Signup.dart';
 import 'package:mini_project/splash.dart';
+import 'auth.dart';
 
 class loginRegister extends StatefulWidget {
   const loginRegister({super.key});
@@ -14,34 +15,7 @@ class loginRegister extends StatefulWidget {
 }
 
 class _loginRegisterState extends State<loginRegister> {
-  // static Future<User?> loginUsingEmailPassword(
-  //     {required String email,
-  //     required String password,
-  //     required BuildContext context}) async {
-  //   FirebaseAuth auth = FirebaseAuth.instance;
-  //   User? user;
-  //   try {
-  //     UserCredential userCredential = await auth.signInWithEmailAndPassword(
-  //         email: email, password: password);
-  //     user = userCredential.user;
-  //   } on FirebaseAuthException catch (e) {
-  //     if (e.code == 'user-not-found') {
-  //       print("No User Found for that email!");
-  //     }
-  //   }
-  //   return user;
-  // }
-  Future signIn() async{
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text.trim(), 
-      password: passwordController.text.trim()
-      );
-  }
-
-
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
+  AuthController authController = AuthController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +49,7 @@ class _loginRegisterState extends State<loginRegister> {
                 )),
                 //EMAIL
                 TextFormField(
-                  controller: emailController,
+                  controller: authController.emailController,
                   decoration: InputDecoration(
                     hintText: 'Email',
                     prefixIcon: Icon(Icons.email_rounded),
@@ -88,7 +62,7 @@ class _loginRegisterState extends State<loginRegister> {
                 ),
                 //PASSWORD
                 TextFormField(
-                  controller: passwordController,
+                  controller: authController.passwordController,
                   decoration: InputDecoration(
                     hintText: 'Password',
                     prefixIcon: Icon(Icons.password_sharp),
@@ -111,16 +85,7 @@ class _loginRegisterState extends State<loginRegister> {
                       ),
                     ),
                     onPressed: () async {
-                      User? user = await loginUsingEmailPassword(
-                          email: emailController.text,
-                          password: passwordController.text,
-                          context: context);
-                      print(user);
-                      if (user != null) {
-                        print('Username Not Found');
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => splashScreen()));
-                      }
+                      authController.loginUser();
                     },
                     child: Text(
                       "Login",
