@@ -22,27 +22,16 @@ class _HomePageState extends State<HomePage> {
   String name = "";
   void getDataName() async {
     User? user = await FirebaseAuth.instance.currentUser;
-    var vari = await FirebaseFirestore.instance.collection('users').doc(user!.uid).get();
+    var vari = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get();
     setState(() {
-      name = (vari.data()as dynamic)['username'];
+      name = (vari.data() as dynamic)['username'];
     });
   }
 
   AuthController authController = AuthController();
-
-  // Future getSampah() async {
-  //   await FirebaseFirestore.instance
-  //   .collection('users')
-  //   .get()
-  //   .then((QuerySnapshot querySnapshot) {
-  //       querySnapshot.docs.forEach((doc) {
-  //           FirebaseFirestore.instance
-  //              .doc(doc.id)
-  //              .collection("jobPost")
-  //              .get()
-  //       });
-  //   });
-  // }
 
   @override
   void initState() {
@@ -71,33 +60,44 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Container(
-            height: 70,
+            height: 90,
             decoration: BoxDecoration(
-                    color: Colors.grey
-                  ),
+                color: Colors.grey, border: Border.all(color: Colors.grey)),
             child: Row(
               children: [
                 Container(
-                  padding: EdgeInsets.fromLTRB(20,10,0,0),
-                  child: Text('Hai, ${name}!',style: TextStyle(fontSize: 18),)),
-                
+                    padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                    child: Text(
+                      'Hai, ${name}!',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    )),
               ],
             ),
-          ),
-          Row(
-            children: [
-              Container(
-                  padding: EdgeInsets.fromLTRB(20, 0, 0, 50),
-                  child: Text(
-                    'Dana',
-                  )),
-                  
-            ],
           ),
           SizedBox(
             height: 50,
           ),
-          Center(child: Image.asset('assets/images/notfound.png')),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('orderSampah')
+                .snapshots(),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+
+              }
+              if(snapshot.hasData){
+                return GridView(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                );
+              }
+              return Image.asset('assets/images/notfound.png');
+          }
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
