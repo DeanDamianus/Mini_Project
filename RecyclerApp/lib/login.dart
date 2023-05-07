@@ -85,7 +85,7 @@ class _loginRegisterState extends State<loginRegister> {
                       ),
                     ),
                     onPressed: () async {
-                      authController.loginUser();
+                      authController.signIn();
                     },
                     child: Text(
                       "Login",

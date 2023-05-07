@@ -87,15 +87,21 @@ class _koranPageState extends State<koranPage> {
                     backgroundColor: Colors.green,
                   ),
                   onPressed: () async {
-                    FirebaseFirestore.instance.collection('pesananSampah').add({
-                      "harga": totalHarga*simpleIntInput.toInt(),
-                      "berat": simpleIntInput,
-                      "jenis": "Koran"
-                    }).then((value) {
-                      print(value.id);
-                      Navigator.pop(context);
-                    }).catchError(
-                        (error) => print("gagal due to internet error"));
+                    User? user = FirebaseAuth.instance.currentUser;
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(user!.uid)
+                          .collection('orderSampah')
+                          .add({
+                        "harga":
+                            totalHarga * simpleIntInput.toInt(),
+                        "berat": simpleIntInput,
+                        "jenis": "Koran"
+                      }).then((value) {
+                        print(value.id);
+                        Navigator.pop(context);
+                      }).catchError(
+                              (error) => print("gagal due to internet error"));
                   },
                 ),
               )

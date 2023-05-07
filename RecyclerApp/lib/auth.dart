@@ -15,8 +15,6 @@ import 'package:get/get.dart';
 class AuthController extends GetxController {
   //signup
   final TextEditingController usernamebaruController = TextEditingController();
-  final TextEditingController emailbaruController = TextEditingController();
-  final TextEditingController passwordbaruController = TextEditingController();
   final TextEditingController nomorHp = TextEditingController();
 
   //login
@@ -27,12 +25,12 @@ class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Future<void> createAccount() async {
     final user = await _auth.createUserWithEmailAndPassword(
-        email: emailbaruController.text, password: passwordbaruController.text);
+        email: emailController.text, password: passwordController.text);
     final firestore = FirebaseFirestore.instance;
     firestore.collection('users').doc(user.user!.uid).set({
       "username": usernamebaruController.text,
-      "email": emailbaruController.text,
-      "password": passwordbaruController.text,
+      "email": emailController.text,
+      "password": passwordController.text,
       "nomorHp": nomorHp.text,
     });
     if (user != null) {
@@ -42,18 +40,15 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> loginUser() async {
-    final user = await _auth.signInWithEmailAndPassword(
-        email: emailController.text, password: passwordController.text);
-
-    if (user != null) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("userUID", user.user!.uid);
-      print(user.user!.uid);
+  Future signIn() async {
+    final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim());
+      if (user != null) {
       Get.to(HomePage());
     } else {
       print('error');
-    }
+    } 
   }
 
   Future<void> logoutUser() async {
@@ -62,5 +57,4 @@ class AuthController extends GetxController {
     prefs.clear();
     Get.offAll(loginRegister());
   }
-
 }

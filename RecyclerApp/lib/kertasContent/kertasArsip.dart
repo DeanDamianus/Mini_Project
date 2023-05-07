@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/kertas.dart';
 import 'package:quantity_input/quantity_input.dart';
@@ -82,15 +83,21 @@ class _arsipPageState extends State<arsipPage> {
                     backgroundColor: Colors.green,
                   ),
                   onPressed: () async {
-                    FirebaseFirestore.instance.collection('pesananSampah').add({
-                      "harga": totalHargaArsip * simpleIntInputarsip.toInt(),
-                      "berat": simpleIntInputarsip,
-                      "jenis": "Kertas Arsip"
-                    }).then((value) {
-                      print(value.id);
-                      Navigator.pop(context);
-                    }).catchError(
-                        (error) => print("gagal due to internet error"));
+                    User? user = FirebaseAuth.instance.currentUser;
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(user!.uid)
+                          .collection('orderSampah')
+                          .add({
+                        "harga":
+                            totalHargaArsip * simpleIntInputarsip.toInt(),
+                        "berat": simpleIntInputarsip,
+                        "jenis": "Kertas Arsip"
+                      }).then((value) {
+                        print(value.id);
+                        Navigator.pop(context);
+                      }).catchError(
+                              (error) => print("gagal due to internet error"));
                   },
                 ),
               )

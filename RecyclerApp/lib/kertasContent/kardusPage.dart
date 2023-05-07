@@ -85,15 +85,21 @@ class _kardusPageState extends State<kardusPage> {
                     backgroundColor: Colors.green,
                   ),
                   onPressed: () async {
-                    FirebaseFirestore.instance.collection('pesananSampah').add({
-                      "harga": totalHargaKardus * simpleIntInputkardus.toInt(),
-                      "berat": simpleIntInputkardus,
-                      "jenis": "Kardus"
-                    }).then((value) {
-                      print(value.id);
-                      Navigator.pop(context);
-                    }).catchError(
-                        (error) => print("gagal due to internet error"));
+                    User? user = FirebaseAuth.instance.currentUser;
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(user!.uid)
+                          .collection('orderSampah')
+                          .add({
+                        "harga":
+                            totalHargaKardus * simpleIntInputkardus.toInt(),
+                        "berat": simpleIntInputkardus,
+                        "jenis": "Karton"
+                      }).then((value) {
+                        print(value.id);
+                        Navigator.pop(context);
+                      }).catchError(
+                              (error) => print("gagal due to internet error"));
                   },
                 ),
               )

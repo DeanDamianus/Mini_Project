@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/kertas.dart';
 import 'package:quantity_input/quantity_input.dart';
@@ -75,23 +76,28 @@ class _kartonPageState extends State<kartonPage> {
               ),
               Center(
                 child: TextButton(
-                  child: Text('POST'),
-                  style: TextButton.styleFrom(
-                    primary: Colors.white,
-                    backgroundColor: Colors.green,
-                  ),
-                  onPressed: () async {
-                    FirebaseFirestore.instance.collection('pesananSampah').add({
-                      "harga": totalHargaKarton * simpleIntInputkarton.toInt(),
-                      "berat": simpleIntInputkarton,
-                      "jenis": "Karton"
-                    }).then((value) {
-                      print(value.id);
-                      Navigator.pop(context);
-                    }).catchError(
-                        (error) => print("gagal due to internet error"));
-                  },
-                ),
+                    child: Text('POST'),
+                    style: TextButton.styleFrom(
+                      primary: Colors.white,
+                      backgroundColor: Colors.green,
+                    ),
+                    onPressed: () async {
+                      User? user = FirebaseAuth.instance.currentUser;
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(user!.uid)
+                          .collection('orderSampah')
+                          .add({
+                        "harga":
+                            totalHargaKarton * simpleIntInputkarton.toInt(),
+                        "berat": simpleIntInputkarton,
+                        "jenis": "Karton"
+                      }).then((value) {
+                        print(value.id);
+                        Navigator.pop(context);
+                      }).catchError(
+                              (error) => print("gagal due to internet error"));
+                    }),
               )
             ],
           )),

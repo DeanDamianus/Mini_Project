@@ -62,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  controller: authController.emailbaruController,
+                  controller: authController.emailController,
                   decoration: InputDecoration(
                       hintText: 'Email',
                       prefixIcon: Icon(Icons.email_rounded),
@@ -73,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  controller: authController.passwordbaruController,
+                  controller: authController.passwordController,
                   decoration: InputDecoration(
                       hintText: 'Password',
                       prefixIcon: Icon(Icons.password_sharp),

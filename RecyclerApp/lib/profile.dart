@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
 import 'package:mini_project/logout.dart';
@@ -10,6 +12,20 @@ class profilePage extends StatefulWidget {
 }
 
 class _profilePageState extends State<profilePage> {
+  String name = "";
+  void getData() async {
+    User? user = await FirebaseAuth.instance.currentUser;
+    var vari = await FirebaseFirestore.instance.collection('users').doc(user!.uid).get();
+    setState(() {
+      name = (vari.data()as dynamic)['username'];
+    });
+  }
+
+    void initState() {
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,14 +44,29 @@ class _profilePageState extends State<profilePage> {
             ],
           ),
         ),
-      body: Center(
-        child: CircleAvatar(radius: 300,
-        backgroundColor: Colors.white,
-          child: 
-            CircleAvatar(
-              radius: 290,
-              ),),
-        ),
+      body: Column(
+        children:[ 
+          Center(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+              child: CircleAvatar(
+              radius: 80,
+              child: ClipOval(
+                  child: Image.asset(
+                    'assets/images/anonim.png',
+                  ),
+              ),
+          ),
+            ),
+          ),
+          Container(
+            child: Column(children: [
+              Text('$name'),
+
+            ]),
+          )
+        ]),
+      
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
