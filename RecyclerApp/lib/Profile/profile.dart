@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
+import 'package:mini_project/Profile/alamat.dart';
+import 'package:mini_project/Profile/nomorHp.dart';
+import 'package:mini_project/Profile/username.dart';
 import 'package:mini_project/logout.dart';
 
 class profilePage extends StatefulWidget {
@@ -12,9 +15,10 @@ class profilePage extends StatefulWidget {
 }
 
 class _profilePageState extends State<profilePage> {
-  String name = "";
-  String _email = "";
-  String _nohp = "";
+  String name = "Loading...";
+  String _email = "Loading...";
+  String _nohp = "Loading...";
+  String _alamat = "Loading...";
   void getDatausername() async {
     User? user = await FirebaseAuth.instance.currentUser;
     var vari = await FirebaseFirestore.instance
@@ -48,10 +52,22 @@ class _profilePageState extends State<profilePage> {
     });
   }
 
+  void getDataAlamat() async {
+    User? user = await FirebaseAuth.instance.currentUser;
+    var vari = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get();
+    setState(() {
+      _alamat = (vari.data() as dynamic)['alamat'];
+    });
+  }
+
   void initState() {
     getDatausername();
     getDataemail();
     getDatanomorhp();
+    getDataAlamat();
     super.initState();
   }
 
@@ -98,12 +114,16 @@ class _profilePageState extends State<profilePage> {
                     fontWeight: FontWeight.bold),
               ),
               GestureDetector(
-                onTap: (){
-
-                } ,
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => usernameEdit()));
+                },
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(20,0,0,0),
-                  child: Icon(Icons.edit,size: 20,)),
+                    padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: Icon(
+                      Icons.edit,
+                      size: 20,
+                    )),
               )
             ]),
           ),
@@ -114,7 +134,6 @@ class _profilePageState extends State<profilePage> {
                 '$name',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
-              
             ]),
           ),
           Container(
@@ -135,7 +154,6 @@ class _profilePageState extends State<profilePage> {
                 '$_email',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
-              
             ]),
           ),
           Container(
@@ -148,14 +166,17 @@ class _profilePageState extends State<profilePage> {
                     fontWeight: FontWeight.bold),
               ),
               GestureDetector(
-                onTap: (){
-
-                } ,
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => nomorHp()));
+                },
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(20,0,0,0),
-                  child: Icon(Icons.edit,size: 20,)),
+                    padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: Icon(
+                      Icons.edit,
+                      size: 20,
+                    )),
               )
-              
             ]),
           ),
           Container(
@@ -165,7 +186,38 @@ class _profilePageState extends State<profilePage> {
                 '$_nohp',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
-            
+            ]),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+            child: Row(children: [
+              Text(
+                'Alamat',
+                style: TextStyle(
+                    color: Color.fromRGBO(88, 87, 88, 1),
+                    fontWeight: FontWeight.bold),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => alammatProfile()));
+                },
+                child: Container(
+                    padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: Icon(
+                      Icons.edit,
+                      size: 20,
+                    )),
+              )
+            ]),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(40, 0, 0, 40),
+            child: Row(children: [
+              Text(
+                '$_alamat',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ]),
           ),
         ]),

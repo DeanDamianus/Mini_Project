@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
-import 'package:mini_project/kertas.dart';
+import 'package:mini_project/kertasContent/kertas.dart';
 import 'package:mini_project/logout.dart';
-import 'package:mini_project/plastik.dart';
+import 'package:mini_project/plastikContent/plastik.dart';
 import 'package:quantity_input/quantity_input.dart';
 
 class koranPage extends StatefulWidget {
@@ -15,9 +15,8 @@ class koranPage extends StatefulWidget {
 }
 
 class _koranPageState extends State<koranPage> {
-  int simpleIntInput = 0;
+  int simpleIntInput = 1;
   int totalHarga = 1000;
-
 
   @override
   Widget build(BuildContext context) {
@@ -86,23 +85,93 @@ class _koranPageState extends State<koranPage> {
                     primary: Colors.white,
                     backgroundColor: Colors.green,
                   ),
-                  onPressed: () async {
-                    User? user = FirebaseAuth.instance.currentUser;
-                      FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(user!.uid)
-                          .collection('orderSampah')
-                          .add({
-                        "harga":
-                            totalHarga * simpleIntInput.toInt(),
-                        "berat": simpleIntInput,
-                        "jenis": "Koran"
-                      }).then((value) {
-                        print(value.id);
-                        Navigator.pop(context);
-                      }).catchError(
-                              (error) => print("gagal due to internet error"));
-                  },
+                  onPressed: () {
+              showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text("Koran"),
+                  content: const Text("Apakah anda yakin ingin post?"),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 40,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: const Text("Terima Kasih!"),
+                                  content: const Text("Silahkan Menunggu informasi lebih lanjut dari Driver!"),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(ctx).pop();
+                                      },
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 40,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                               User? user = FirebaseAuth.instance.currentUser;
+                                FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(user!.uid)
+                                    .collection('orderSampah')
+                                    .add({
+                                  "harga":totalHarga * simpleIntInput.toInt(),
+                                  "berat": simpleIntInput,
+                                  "jenis": "Koran",
+                                  "status": "Delivered.."
+                                }).then((value) {
+                                  print(value.id);
+                                  Navigator.push(
+                                  context, MaterialPageRoute(builder: (context) => HomePage()));
+                                }).catchError(
+                                        (error) => print("gagal due to internet error"));
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.all(14),
+                                              child: const Text("OKE!, DITUNGGU!"),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(14),
+                              child: const Text("Ya"),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 40,
+                          ),
+                          GestureDetector(
+                            child: Container(
+                              padding: const EdgeInsets.all(14),
+                              child: const Text("Tidak"),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+                       
                 ),
               )
             ],
@@ -120,3 +189,4 @@ class _koranPageState extends State<koranPage> {
     );
   }
 }
+

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
 import 'login.dart';
-import 'auth.dart';
+import 'backEnd/auth.dart';
 
 class logoutScreen extends StatefulWidget {
   const logoutScreen({super.key});

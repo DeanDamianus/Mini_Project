@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mini_project/kertas.dart';
+import 'package:mini_project/HomePage.dart';
+import 'package:mini_project/kertasContent/kertas.dart';
 import 'package:quantity_input/quantity_input.dart';
 
 class kartonPage extends StatefulWidget {
@@ -12,7 +13,7 @@ class kartonPage extends StatefulWidget {
 }
 
 class _kartonPageState extends State<kartonPage> {
-  int simpleIntInputkarton = 0;
+  int simpleIntInputkarton = 1;
   int totalHargaKarton = 500;
   @override
   Widget build(BuildContext context) {
@@ -82,21 +83,90 @@ class _kartonPageState extends State<kartonPage> {
                       backgroundColor: Colors.green,
                     ),
                     onPressed: () async {
-                      User? user = FirebaseAuth.instance.currentUser;
-                      FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(user!.uid)
-                          .collection('orderSampah')
-                          .add({
-                        "harga":
-                            totalHargaKarton * simpleIntInputkarton.toInt(),
-                        "berat": simpleIntInputkarton,
-                        "jenis": "Karton"
-                      }).then((value) {
-                        print(value.id);
-                        Navigator.pop(context);
-                      }).catchError(
-                              (error) => print("gagal due to internet error"));
+                         showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text("Karton"),
+                  content: const Text("Apakah anda yakin ingin post?"),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 40,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: const Text("Terima Kasih!"),
+                                  content: const Text("Silahkan Menunggu informasi lebih lanjut dari Driver!"),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(ctx).pop();
+                                      },
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 40,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                               User? user = FirebaseAuth.instance.currentUser;
+                                FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(user!.uid)
+                                    .collection('orderSampah')
+                                    .add({
+                                  "harga":totalHargaKarton * simpleIntInputkarton.toInt(),
+                                  "berat": simpleIntInputkarton,
+                                  "jenis": "Karton",
+                                  "status": "Delivered.."
+                                }).then((value) {
+                                  print(value.id);
+                                  Navigator.push(
+                                  context, MaterialPageRoute(builder: (context) => HomePage()));
+                                }).catchError(
+                                        (error) => print("gagal due to internet error"));
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.all(14),
+                                              child: const Text("OKE!, DITUNGGU!"),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(14),
+                              child: const Text("Ya"),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 40,
+                          ),
+                          GestureDetector(
+                            child: Container(
+                              padding: const EdgeInsets.all(14),
+                              child: const Text("Tidak"),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
                     }),
               )
             ],

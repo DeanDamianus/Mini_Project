@@ -7,7 +7,7 @@ import 'package:mini_project/kertasContent/kartonPage.dart';
 import 'package:mini_project/kertasContent/kertasArsip.dart';
 import 'package:mini_project/kertasContent/koranPage.dart';
 import 'package:mini_project/logout.dart';
-import 'login.dart';
+import '../login.dart';
 
 class kertasPage extends StatelessWidget {
   const kertasPage({super.key});

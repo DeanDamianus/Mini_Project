@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
-import 'package:mini_project/kertas.dart';
+import 'package:mini_project/besiContent/besi.dart';
+import 'package:mini_project/kertasContent/kertas.dart';
 import 'package:mini_project/logout.dart';
-import 'package:mini_project/plastik.dart';
+import 'package:mini_project/plastikContent/plastik.dart';
 import 'login.dart';
 
 class contentPage extends StatelessWidget {
@@ -23,50 +24,117 @@ class contentPage extends StatelessWidget {
                 height: 32,
               ),
               Container(
-                  padding: const EdgeInsets.all(8.0), child: Text('Re-Cycler'))
+                  padding: const EdgeInsets.all(8.0), child: Text('Pilih Material'))
             ],
           ),
         ),
       body: Container(
-        child: GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(20),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => kertasPage()));
-              },
-              child: Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.brown,
-                  child: Container( 
-                    color: Colors.green,
-                    child: Image.asset(
-                      'assets/images/paper.png',
+        padding: EdgeInsets.fromLTRB(30,30,0,0),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: <Widget>[
+                  Container(
+                    color: Colors.brown,
+                    child: Card(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => kertasPage()),
+                          );
+                        },
+                        child: SizedBox(
+                          height: 100,
+                          width: 140,
+                          child: Container(
+                            color: Colors.green,
+                            child: Image.asset(
+                              'assets/images/paper.png',
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                  )),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => plastikPage()));
-              },
-              child: Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.brown,
-                  child: Container(
-                    color: Colors.green,
-                    child: Image.asset(
-                      'assets/images/plastics.png',
-                    ), 
-                  )),
-            ),
-          ],
-        ),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Container(
+                    color: Colors.brown,
+                    child: Card(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => plastikPage()),
+                          );
+                        },
+                        child: SizedBox(
+                          height: 100,
+                          width: 140,
+                          child: Container(
+                            color: Colors.green,
+                            child: Image.asset(
+                              'assets/images/plastics.png',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                
+                children: <Widget>[
+                  Container(
+                    color: Colors.brown,
+                    child: Card(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => besiPage()),
+                          );
+                        },
+                        child: SizedBox(
+                          height: 100,
+                          width: 140,
+                          child: Container(
+                            color: Colors.green,
+                            child: Image.asset(
+                              'assets/images/steels.png',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 170,
+                  )
+                 
+                ],
+              ),
+              SizedBox(
+                height: 100),
+              Container(
+                height: 230,
+                child: 
+                Image.asset('assets/images/peoples.png'))
+            ],
+          ),
+        
+
+
+
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

@@ -1,13 +1,10 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mini_project/auth.dart';
+import 'package:mini_project/backEnd/auth.dart';
 import 'package:mini_project/content.dart';
 import 'package:mini_project/logout.dart';
-import 'package:mini_project/profile.dart';
-import 'package:mini_project/splash.dart';
+import 'package:mini_project/Profile/profile.dart';
 import 'main.dart';
 import 'login.dart';
 
@@ -19,7 +16,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String name = "";
+  String name = "Loading...";
+  num total = 0;
+
+  AuthController authController = AuthController();
+  User? user = FirebaseAuth.instance.currentUser;
+
   void getDataName() async {
     User? user = await FirebaseAuth.instance.currentUser;
     var vari = await FirebaseFirestore.instance
@@ -31,11 +33,45 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  AuthController authController = AuthController();
+  void getTotal() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    int sum = 0;
+    var snapshots = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .collection('orderSampah')
+        .get();
+    snapshots.docs.forEach((doc) {
+      int harga = doc.data()['harga'];
+      if (harga is num || harga is double) {
+        sum += harga;
+      }
+    });
+    setState(() {
+      total = sum;
+    });
+  }
+
+
+  void getSampah() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    var sampah = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .collection('orderSampah')
+        .get();
+    sampah.docs.forEach((doc) {
+      print(doc.data());
+    });
+  }
+
+
 
   @override
   void initState() {
     getDataName();
+    getSampah();
+    getTotal();
     super.initState();
   }
 
@@ -57,48 +93,110 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            height: 90,
-            decoration: BoxDecoration(
-                color: Colors.grey, border: Border.all(color: Colors.grey)),
-            child: Row(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+              height: 90,
+              child: Row(
+                children: [
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 35,
+                            child: ClipOval(
+                              child: Image.asset(
+                                'assets/images/anonim.png',
+                              ),
+                            ),
+                          ),
+                          Container(
+                              padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                              child: Text(
+                                'Hai, ${name}!',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              )),
+                        ],
+                      ),    
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Row(
               children: [
                 Container(
-                    padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
-                    child: Text(
-                      'Hai, ${name}!',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
+                      child: Text(
+                                'Estimasi Pendapatan kamu: Rp.$total,-',
+                                style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),
+                              ),
+                )),
               ],
             ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection('orderSampah')
-                .snapshots(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-
-              }
-              if(snapshot.hasData){
-                return GridView(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                );
-              }
-              return Image.asset('assets/images/notfound.png');
-          }
-          ),
-        ],
+            SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 4,
+              width: double.infinity,
+              child: const DecoratedBox(decoration: BoxDecoration(color: Colors.brown)),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(user!.uid)
+                  .collection('orderSampah')
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return Center(
+                      child: Container(
+                          padding: EdgeInsets.all(40),
+                          child: Image.asset('assets/images/notfound.png')));
+                }
+                return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      Map<String, dynamic> data = snapshot.data!.docs[index]
+                          .data() as Map<String, dynamic>;
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.green,
+                          backgroundImage: NetworkImage(
+                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqQuXQqV3GVJnvk3cs8LN9ubPo3cn3N6c79A&usqp=CAU'),
+                          child: Text(
+                            data['jenis'].substring(0, 1),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
+                        title: Text(data['jenis'],
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        subtitle: Text(
+                            'Berat: ${data['berat']} kg, Rp.${data['harga']}-, Status: ${data['status']}'),
+                      
+                          
+                      );
+                    });
+              },
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

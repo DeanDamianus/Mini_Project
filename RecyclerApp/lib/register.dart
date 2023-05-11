@@ -3,8 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
 import 'package:mini_project/login.dart';
-import 'package:mini_project/splash.dart';
-import 'auth.dart';
+import 'backEnd/auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -94,8 +93,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           borderRadius: BorderRadius.circular(20))),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
+                TextFormField(
+                  controller: authController.alamatController,
+                  decoration: InputDecoration(
+                      hintText: 'Alamat',
+                      prefixIcon: Icon(Icons.home),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                ),
+               SizedBox(
+                  height: 20,
+                ), 
                 Container(
                   width: 250,
                   height: 45,
@@ -135,7 +145,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
-                    )
+                      
+                    ),
+                    SizedBox(
+                height: 40,
+              ),
                   ],
                 ),
               ],

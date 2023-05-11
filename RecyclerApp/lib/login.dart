@@ -3,9 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
-import 'package:mini_project/Signup.dart';
-import 'package:mini_project/splash.dart';
-import 'auth.dart';
+import 'package:mini_project/register.dart';
+import 'backEnd/auth.dart';
 
 class loginRegister extends StatefulWidget {
   const loginRegister({super.key});
@@ -16,6 +15,9 @@ class loginRegister extends StatefulWidget {
 
 class _loginRegisterState extends State<loginRegister> {
   AuthController authController = AuthController();
+
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

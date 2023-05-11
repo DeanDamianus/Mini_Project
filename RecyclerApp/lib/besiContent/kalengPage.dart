@@ -2,21 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/HomePage.dart';
-import 'package:mini_project/kertasContent/kertas.dart';
-import 'package:mini_project/logout.dart';
-import 'package:mini_project/plastikContent/plastik.dart';
+import 'package:mini_project/besiContent/besi.dart';
 import 'package:quantity_input/quantity_input.dart';
 
-class kardusPage extends StatefulWidget {
-  const kardusPage({super.key});
+class kalengPage extends StatefulWidget {
+  const kalengPage({super.key});
 
   @override
-  State<kardusPage> createState() => _kardusPageState();
+  State<kalengPage> createState() => _kalengPageState();
 }
 
-class _kardusPageState extends State<kardusPage> {
-  int simpleIntInputkardus = 1;
-  int totalHargaKardus = 700;
+class _kalengPageState extends State<kalengPage> {
+    int simpleIntInputkaleng = 1;
+  int totalHargakaleng = 1400;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +28,7 @@ class _kardusPageState extends State<kardusPage> {
               fit: BoxFit.contain,
               height: 32,
             ),
-            Container(padding: const EdgeInsets.all(8.0), child: Text('Kardus'))
+            Container(padding: const EdgeInsets.all(8.0), child: Text('Kaleng'))
           ],
         ),
       ),
@@ -40,7 +38,7 @@ class _kardusPageState extends State<kardusPage> {
             children: [
               Center(
                 child: Image.asset(
-                  'assets/images/kardus.png',
+                  'assets/images/kaleng.jpg',
                   height: 200,
                 ),
               ),
@@ -49,7 +47,7 @@ class _kardusPageState extends State<kardusPage> {
               ),
               Center(
                 child: Text(
-                  'Kardus',
+                  'Kaleng',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -63,15 +61,15 @@ class _kardusPageState extends State<kardusPage> {
                 height: 10,
               ),
               Center(
-                child: const Text('Total Harga 1 kg = Rp. 700,-'),
+                child: const Text('Total Harga 1 kg = Rp. 1400,-'),
               ),
               SizedBox(
                 height: 10,
               ),
               Center(
                 child: QuantityInput(
-                    value: simpleIntInputkardus,
-                    onChanged: (value) => setState(() => simpleIntInputkardus =
+                    value: simpleIntInputkaleng,
+                    onChanged: (value) => setState(() => simpleIntInputkaleng =
                         int.parse(value.replaceAll(',', 'KG')))),
               ),
               SizedBox(
@@ -88,7 +86,7 @@ class _kardusPageState extends State<kardusPage> {
                        showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
-                  title: const Text("Kardus"),
+                  title: const Text("Kaleng"),
                   content: const Text("Apakah anda yakin ingin post?"),
                   actions: <Widget>[
                     TextButton(
@@ -125,9 +123,9 @@ class _kardusPageState extends State<kardusPage> {
                                     .doc(user!.uid)
                                     .collection('orderSampah')
                                     .add({
-                                  "harga":totalHargaKardus * simpleIntInputkardus.toInt(),
-                                  "berat": simpleIntInputkardus,
-                                  "jenis": "Kardus",
+                                  "harga":totalHargakaleng * simpleIntInputkaleng.toInt(),
+                                  "berat": simpleIntInputkaleng,
+                                  "jenis": "Kaleng",
                                   "status": "Delivered.."
                                 }).then((value) {
                                   print(value.id);
@@ -177,7 +175,7 @@ class _kardusPageState extends State<kardusPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => kertasPage()));
+              context, MaterialPageRoute(builder: (context) => besiPage()));
         },
         child: Icon(
           Icons.arrow_back,

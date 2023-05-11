@@ -6,7 +6,7 @@ import 'package:mini_project/logout.dart';
 import 'package:mini_project/plastikContent/botolPage.dart';
 import 'package:mini_project/plastikContent/galonAir.dart';
 import 'package:mini_project/plastikContent/plasticCup.dart';
-import 'login.dart';
+import '../login.dart';
 
 class plastikPage extends StatelessWidget {
   const plastikPage({super.key});

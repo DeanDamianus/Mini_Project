@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mini_project/HomePage.dart';
 import 'package:mini_project/login.dart';
-import 'package:mini_project/splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {

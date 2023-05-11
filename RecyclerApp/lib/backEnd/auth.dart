@@ -4,10 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mini_project/HomePage.dart';
 import 'package:mini_project/login.dart';
-import 'package:mini_project/splash.dart';
-import 'package:mini_project/userModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Signup.dart';
+import '../register.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -16,6 +14,8 @@ class AuthController extends GetxController {
   //signup
   final TextEditingController usernamebaruController = TextEditingController();
   final TextEditingController nomorHp = TextEditingController();
+  final TextEditingController alamatController = TextEditingController();
+  
 
   //login
 
@@ -32,6 +32,7 @@ class AuthController extends GetxController {
       "email": emailController.text,
       "password": passwordController.text,
       "nomorHp": nomorHp.text,
+      "alamat": alamatController.text
     });
     if (user != null) {
       Get.to(HomePage());
@@ -39,6 +40,7 @@ class AuthController extends GetxController {
       print('error');
     }
   }
+
 
   Future signIn() async {
     final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -58,3 +60,7 @@ class AuthController extends GetxController {
     Get.offAll(loginRegister());
   }
 }
+
+
+
+
