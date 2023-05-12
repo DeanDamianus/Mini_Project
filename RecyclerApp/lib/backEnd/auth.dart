@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mini_project/HomePage.dart';
+import 'package:mini_project/admin.dart';
 import 'package:mini_project/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../register.dart';
@@ -15,7 +16,6 @@ class AuthController extends GetxController {
   final TextEditingController usernamebaruController = TextEditingController();
   final TextEditingController nomorHp = TextEditingController();
   final TextEditingController alamatController = TextEditingController();
-  
 
   //login
 
@@ -23,6 +23,7 @@ class AuthController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   Future<void> createAccount() async {
     final user = await _auth.createUserWithEmailAndPassword(
         email: emailController.text, password: passwordController.text);
@@ -32,7 +33,8 @@ class AuthController extends GetxController {
       "email": emailController.text,
       "password": passwordController.text,
       "nomorHp": nomorHp.text,
-      "alamat": alamatController.text
+      "alamat": alamatController.text,
+      "role": "user"
     });
     if (user != null) {
       Get.to(HomePage());
@@ -41,16 +43,20 @@ class AuthController extends GetxController {
     }
   }
 
-
   Future signIn() async {
-    final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim());
-      if (user != null) {
-      Get.to(HomePage());
-    } else {
-      print('error');
-    } 
+    try {
+      final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+
+      if ( emailController.text.trim() == "admin@gmail.com") {
+        Get.off(adminPage());
+      } else {
+        Get.off(HomePage());
+      }
+    } on Exception catch (_) {
+      Get.snackbar("Error", "Request Falied");
+    }
   }
 
   Future<void> logoutUser() async {
@@ -59,8 +65,6 @@ class AuthController extends GetxController {
     prefs.clear();
     Get.offAll(loginRegister());
   }
+
+  
 }
-
-
-
-
