@@ -6,6 +6,7 @@ import 'package:mini_project/logoutAdmin.dart';
 import 'package:mini_project/userDetails.dart';
 
 class adminPage extends StatefulWidget {
+  
   const adminPage({super.key});
 
   @override
@@ -13,6 +14,7 @@ class adminPage extends StatefulWidget {
 }
 
 class _adminPageState extends State<adminPage> {
+  
   
   
   
@@ -57,19 +59,19 @@ class _adminPageState extends State<adminPage> {
         QueryDocumentSnapshot userDoc = snapshot.data!.docs[index];
         Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
         String collectionName = userData['username'];
-        
+    
         if (collectionName == 'Admin') {
           return Container();
         }
         
         return GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => userDetails(collectionName: collectionName),
-              ),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => userDetails(collectionName: collectionName),
+            //   ),
+            // );
           },
           child: ListTile(
             title: Text(
