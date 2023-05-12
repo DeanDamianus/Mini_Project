@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/logout.dart';
 import 'package:mini_project/logoutAdmin.dart';
+import 'package:mini_project/userDetails.dart';
 
 class adminPage extends StatefulWidget {
   const adminPage({super.key});
@@ -10,8 +13,13 @@ class adminPage extends StatefulWidget {
 }
 
 class _adminPageState extends State<adminPage> {
+  
+  
+  
+  CollectionReference ref = FirebaseFirestore.instance.collection('users');
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -28,7 +36,48 @@ class _adminPageState extends State<adminPage> {
           ],
         ),
       ),
-      body: Center(child: Text('Ini adalah halaman Admin')),
+      body: StreamBuilder<QuerySnapshot>(
+  stream: FirebaseFirestore.instance.collection('users').snapshots(),
+  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return Center(child: CircularProgressIndicator());
+    }
+    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+      return Center(
+        child: Container(
+          padding: EdgeInsets.all(40),
+          child: Image.asset('assets/images/notfound.png'),
+        ),
+      );
+    }
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: snapshot.data!.docs.length,
+      itemBuilder: (BuildContext context, int index) {
+        QueryDocumentSnapshot userDoc = snapshot.data!.docs[index];
+        String collectionName = userDoc.id;
+        Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+        return GestureDetector(
+          onTap: () {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => UserDetailPage(collectionName: collectionName),
+            //   ),
+            // );
+          },
+          child: ListTile(
+            title: Text(
+              'Collection Name: $collectionName',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        );
+      },
+    );
+  },
+),
+
       bottomNavigationBar: BottomAppBar(
         color: Colors.green,
         shape: CircularNotchedRectangle(),
@@ -37,7 +86,6 @@ class _adminPageState extends State<adminPage> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            
             IconButton(
               icon: Icon(
                 Icons.logout,

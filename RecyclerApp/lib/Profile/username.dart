@@ -13,7 +13,7 @@ class usernameEdit extends StatefulWidget {
 
 class _usernameEditState extends State<usernameEdit> {
   AuthController authController = AuthController();
-  var usernameBaru = TextEditingController();
+  CollectionReference ref = FirebaseFirestore.instance.collection('users');
 
   // static Future update() async {
   //   User? user = await FirebaseAuth.instance.currentUser;
@@ -46,45 +46,46 @@ class _usernameEditState extends State<usernameEdit> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(children: [
-          Container(
-              height: 300, child: Image.asset('assets/images/username.png')),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            padding: EdgeInsets.all(20),
-            child: TextFormField(
-              controller: authController.usernamebaruController,
-              decoration: InputDecoration(
-                  hintText: 'Username',
-                  prefixIcon: Icon(Icons.person),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20))),
-            ),
-          ),
-          Center(
-            child: TextButton(
-              child: Text('UBAH'),
-              style: TextButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Colors.green,
-              ),
-              onPressed: () async {
-                try {
-                  FirebaseAuth.instance.currentUser!
-                      .updateDisplayName(authController.usernamebaruController.text);
-                } catch (e) {
-                  print(e);
-                }
-                FirebaseAuth.instance.currentUser!
-                    .updateDisplayName(authController.usernamebaruController.text);
-              },
-            ),
-          )
-        ]),
-      ),
+      
+      // body: SingleChildScrollView(
+      //   child: Column(children: [
+      //     Container(
+      //         height: 300, child: Image.asset('assets/images/username.png')),
+      //     SizedBox(
+      //       height: 20,
+      //     ),
+      //     Container(
+      //       padding: EdgeInsets.all(20),
+      //       child: TextFormField(
+      //         controller: authController.usernamebaruController,
+      //         decoration: InputDecoration(
+      //             hintText: 'Username',
+      //             prefixIcon: Icon(Icons.person),
+      //             border: OutlineInputBorder(
+      //                 borderRadius: BorderRadius.circular(20))),
+      //       ),
+      //     ),
+      //     Center(
+      //       child: TextButton(
+      //         child: Text('UBAH'),
+      //         style: TextButton.styleFrom(
+      //           primary: Colors.white,
+      //           backgroundColor: Colors.green,
+      //         ),
+      //         onPressed: () async {
+      //           try {
+      //             FirebaseAuth.instance.currentUser!.updateDisplayName(
+      //                 authController.usernamebaruController.text);
+      //           } catch (e) {
+      //             print(e);
+      //           }
+      //           FirebaseAuth.instance.currentUser!.updateDisplayName(
+      //               authController.usernamebaruController.text);
+      //         },
+      //       ),
+      //     )
+      //   ]),
+      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
