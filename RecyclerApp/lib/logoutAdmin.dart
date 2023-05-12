@@ -49,7 +49,7 @@ class _logoutAdminState extends State<logoutAdmin> {
                     ),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => adminPage()));
+                          MaterialPageRoute(builder: (context) => AdminPage()));
                     },
                     child: Text(
                       "Kembali",

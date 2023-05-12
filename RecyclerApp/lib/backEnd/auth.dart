@@ -50,7 +50,7 @@ class AuthController extends GetxController {
           password: passwordController.text.trim());
 
       if ( emailController.text.trim() == "admin@gmail.com") {
-        Get.off(adminPage());
+        Get.off(AdminPage());
       } else {
         Get.off(HomePage());
       }

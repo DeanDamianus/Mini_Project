@@ -5,20 +5,18 @@ import 'package:mini_project/logout.dart';
 import 'package:mini_project/logoutAdmin.dart';
 import 'package:mini_project/userDetails.dart';
 
-class adminPage extends StatefulWidget {
-  
-  const adminPage({super.key});
+class AdminPage extends StatefulWidget {
+  const AdminPage({Key? key}) : super(key: key);
 
   @override
-  State<adminPage> createState() => _adminPageState();
+  State<AdminPage> createState() => _AdminPageState();
 }
 
-class _adminPageState extends State<adminPage> {
-  
-  
-  
-  
+class _AdminPageState extends State<AdminPage> {
+  User? user = FirebaseAuth.instance.currentUser;
+
   CollectionReference ref = FirebaseFirestore.instance.collection('users');
+  
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
@@ -39,53 +37,51 @@ class _adminPageState extends State<adminPage> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-  stream: FirebaseFirestore.instance.collection('users').snapshots(),
-  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-    if (snapshot.connectionState == ConnectionState.waiting) {
-      return Center(child: CircularProgressIndicator());
-    }
-    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-      return Center(
-        child: Container(
-          padding: EdgeInsets.all(40),
-          child: Image.asset('assets/images/notfound.png'),
-        ),
-      );
-    }
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: snapshot.data!.docs.length,
-      itemBuilder: (BuildContext context, int index) {
-        QueryDocumentSnapshot userDoc = snapshot.data!.docs[index];
-        Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
-        String collectionName = userData['username'];
-    
-        if (collectionName == 'Admin') {
-          return Container();
-        }
-        
-        return GestureDetector(
-          onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => userDetails(collectionName: collectionName),
-            //   ),
-            // );
-          },
-          child: ListTile(
-            title: Text(
-              'Username: $collectionName',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-        );
-      },
-    );
-  },
-),
+        stream: FirebaseFirestore.instance.collection('users').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return Center(
+              child: Container(
+                padding: EdgeInsets.all(40),
+                child: Image.asset('assets/images/notfound.png'),
+              ),
+            );
+          }
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (BuildContext context, int index) {
+              QueryDocumentSnapshot userDoc = snapshot.data!.docs[index];
+              Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+              String collectionName = userData['username'];
 
+              if (collectionName == 'Admin') {
+                return Container();
+              }
 
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => userDetails(userId: userDoc.id),
+                    ),
+                  );
+                },
+                child: ListTile(
+                  title: Text(
+                    'Username: $collectionName',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.green,
         shape: CircularNotchedRectangle(),
@@ -100,8 +96,10 @@ class _adminPageState extends State<adminPage> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => logoutAdmin()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => logoutAdmin()),
+                );
               },
             ),
           ],
