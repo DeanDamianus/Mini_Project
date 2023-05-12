@@ -55,20 +55,25 @@ class _adminPageState extends State<adminPage> {
       itemCount: snapshot.data!.docs.length,
       itemBuilder: (BuildContext context, int index) {
         QueryDocumentSnapshot userDoc = snapshot.data!.docs[index];
-        String collectionName = userDoc.id;
         Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+        String collectionName = userData['username'];
+        
+        if (collectionName == 'Admin') {
+          return Container();
+        }
+        
         return GestureDetector(
           onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => UserDetailPage(collectionName: collectionName),
-            //   ),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => userDetails(collectionName: collectionName),
+              ),
+            );
           },
           child: ListTile(
             title: Text(
-              'Collection Name: $collectionName',
+              'Username: $collectionName',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
@@ -77,6 +82,7 @@ class _adminPageState extends State<adminPage> {
     );
   },
 ),
+
 
       bottomNavigationBar: BottomAppBar(
         color: Colors.green,
